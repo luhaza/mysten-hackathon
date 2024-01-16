@@ -5,7 +5,7 @@ module marketplace::user {
 
     struct User has key, drop {
         // username; could be taken from sui wallet, custom, or generated id
-        user_id = UID, // ??
+        user_id: UID, // ??
         username: String,
 
         // points accumulated from donations for reward program
