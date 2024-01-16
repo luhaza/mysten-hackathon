@@ -14,6 +14,7 @@ module marketplace::user {
     // constructor function with username and context parameters
     public fun new(user: String, ctx: &mut TxContext): User {
         User {
+            id : object::new(ctx),
             username: user,
             id: object::new(ctx),
             points: 0,
