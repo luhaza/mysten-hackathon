@@ -4,7 +4,7 @@ module marketplace::user {
     use sui::object::{Self, UID, ID};
     use sui::tx_context::TxContext;
 
-    struct User has key {
+    struct User has key, store {
         // username; could be taken from sui wallet, custom, or generated id
         id: UID, 
         username: String,
@@ -30,7 +30,13 @@ module marketplace::user {
     }
 
     // public getter methods
+    public fun id(self: &User) : ID {object::uid_to_inner(&self.id)}
     public fun username(self: &User): String { self.username }
     public fun points(self: &User): u64 { self.points }
     public fun rewards(self: &User) : vector<String> {self.rewards}
+    
+    public fun delete(self: User) {
+        let User {id, username : _, points : _, rewards : _} = self;
+        object::delete(id);
+    }
 }
