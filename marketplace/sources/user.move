@@ -22,14 +22,20 @@ module marketplace::user {
     }
 
     // public function to add points to a user's profile
-    public fun addPoints(self: &mut User, num_points: u64) {
+    public fun add_points(self: &mut User, num_points: u64) {
         self.points = self.points + num_points;
+    }
+
+    public fun add_organization(self: &mut User, org: UID) {
+        vector::push_back(&mut self.orgs, org)
     }
 
     // public getter methods
     public fun username(self: &User): String { self.username }
 
     // public fun userid(self: &User): UID { self.user_id }
+
+    public fun orgs(self: &User): vector<UID> { self.orgs }
 
     public fun points(self: &User): u64 { self.points }
 }
