@@ -4,6 +4,9 @@ module marketplace::organization{
     use sui::tx_context::TxContext;
     use sui::table::{Table, Self};
     use marketplace::user::{User, Self};
+    use sui::coin::{Self, Coin};
+    use sui::transfer;
+    use sui::sui::SUI;
 
     struct Organization has key{
         id : UID,
@@ -28,8 +31,8 @@ module marketplace::organization{
         user::delete(item);
     }
 
-    public fun donate(stake: Coin<SUI>){
-        
+    public fun donate(stake: Coin<SUI>, organization: address){
+        transfer::transfer(stake, organization);
     }
 
     // public getter methods
