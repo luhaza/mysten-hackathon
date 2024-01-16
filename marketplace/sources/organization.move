@@ -24,6 +24,12 @@ module marketplace::organization{
         vector::push_back<UID>(&mut self.members, u_id)
     }
 
+    // public getter methods
+    public fun username(self: &Organization): String { self.name }
 
+    // public fun userid(self: &User): UID { self.user_id }
+    public fun members(self: &Organization): vector<UID> { self.members }
+
+    public fun points(self: &Organization): u64 { self.points }
 
 }
