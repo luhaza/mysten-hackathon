@@ -1,24 +1,23 @@
 module marketplace::user {
     use std::string::String;
-    use std::vector;
-    use sui::object::{Self, UID};
-    use sui::tx_context::TxContext;
+    // use sui::object::{Self, UID};
+    // use sui::tx_context::TxContext;
 
     struct User has key {
-        id: UID, // UID
-        username: String, // username 
-        points: u64, // points accumulated from donations for reward program
-        orgs: vector<UID> // member of organizations vector
+        // username; could be taken from sui wallet, custom, or generated id
+        // user_id: UID, // ??
+        username: String,
+
+        // points accumulated from donations for reward program
+        points: u64
     }
 
-    // constructor function with username and context parameters
-    public fun new(user: String, ctx: &mut TxContext): User {
+    // constructor function
+    public fun new(user: String): User {
         User {
-            id : object::new(ctx),
             username: user,
-            id: object::new(ctx),
-            points: 0,
-            orgs: vector::empty<UID>()
+            // user_id: object::new(&mut TxContext),
+            points: 0
         }
     }
 
@@ -30,7 +29,7 @@ module marketplace::user {
     // public getter methods
     public fun username(self: &User): String { self.username }
 
-    public fun id(self: &User): UID { self.id }
+    // public fun userid(self: &User): UID { self.user_id }
 
     public fun points(self: &User): u64 { self.points }
 }

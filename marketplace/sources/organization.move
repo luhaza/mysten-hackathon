@@ -20,7 +20,9 @@ module marketplace::organization{
         }
     }
 
-    public fun addMember(_name : String, )
+    public fun addMember(self : &mut Organization, u_id : UID){
+        vector::push_back<UID>(&mut self.members, u_id)
+    }
 
 
 
