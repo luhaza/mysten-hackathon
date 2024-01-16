@@ -1,11 +1,12 @@
 module marketplace::user {
     use std::string::String;
-    // use sui::object::{Self, UID};
-    // use sui::tx_context::TxContext;
+    use sui::object::{Self, UID};
+    use sui::tx_context::TxContext;
 
     struct User has key {
         // username; could be taken from sui wallet, custom, or generated id
         // user_id: UID, // ??
+        id : UID,
         username: String,
 
         // points accumulated from donations for reward program
@@ -13,11 +14,11 @@ module marketplace::user {
     }
 
     // constructor function
-    public fun new(user: String): User {
+    public fun new(user: String, ctx: &mut TxContext): User {
         User {
+            id : object::new(ctx),
             username: user,
-            // user_id: object::new(&mut TxContext),
-            points: 0
+            points: 0,
         }
     }
 
