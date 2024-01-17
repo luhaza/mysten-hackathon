@@ -34,10 +34,45 @@ function FundraiserBlock() { //need parameters
 
 function DonationBlock() {
     return (
-        <tr className="donation-row">
-                <td>Fake Organization</td>
-                <td>Goal</td>
-                <td>Current Donation</td>
-        </tr>
+        <>
+            <tr className="donation-row">
+                <td className="donation-container">
+                        <td>Fake Organization</td>
+                </td>
+                <td className="donation-container">
+                        <td>Goal</td>
+                </td>
+                <td className="donation-container">
+                        <td>Current Donation</td>
+                </td> 
+            </tr>
+             <tr> 
+                
+                 <div class="task-progress">
+                     <progress id="progressBar" class="progress progress1" max="100" value="65"></progress>
+
+                     {/* <script>
+                        document.addEventLister("DOMContentLoaded", function () {
+                            animateProgressBar()
+                        })
+
+                        
+                     </script> */}
+                 </div>
+                 <td></td>
+                 <td>
+                    Donate Here
+                </td>
+            </tr>
+        </>
+            
+        
     ); 
 }
+
+// function animateProgressBar(){
+//     const progressBar = document.getElementById('progressBar');
+//     const targetPercentage = 70; 
+//     progressBar.style.width = '${targetPercentage}%'; 
+//     progressBar.value = targetPercentage;              
+// }
