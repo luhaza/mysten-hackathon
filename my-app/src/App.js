@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import UserProfile from './components/UserProfile'
+import UserAndRewards from './components/UserAndRewards'
 import OrganizationsList from './components/OrganizationsList'
 
 
@@ -24,7 +24,7 @@ function MyButton() {
 function MyBox(){
   return (
     <div className="flex-container-row organizations">
-      <UserProfile/>
+      <UserAndRewards/>
       <OrganizationsList/>
     </div>
   ); 
