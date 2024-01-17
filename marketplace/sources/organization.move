@@ -1,7 +1,7 @@
 module marketplace::organization{
-    use std::string::String;
+    use std::string::{String,Self};
     use sui::object::{Self, UID, ID};
-    use sui::tx_context::TxContext;
+    use sui::tx_context::{Self, TxContext};
     use sui::table::{Table, Self};
     use marketplace::user::{User, Self};
     use sui::coin::{Self, Coin};
@@ -10,6 +10,7 @@ module marketplace::organization{
 
     const EZeroAmount: u64 = 0;
 
+    // account capability
     struct AccountCap has key, store {
         id: UID,
         /// The owner of this AccountCap. Note: this is
@@ -17,7 +18,7 @@ module marketplace::organization{
         owner: address
     }
 
-    struct Organization has key{
+    struct Organization has key {
         id : UID,
         name : String,
         table : Table<ID, User>,
@@ -33,11 +34,11 @@ module marketplace::organization{
         }
     }
 
-    public fun addMember(self : &mut Organization, user : User){
+    public fun add_member(self : &mut Organization, user : User){
         table::add(&mut self.table, user::id(&mut user), user);
     }
 
-    public fun removeMember(self : &mut Organization, user : &User){
+    public fun remove_member(self : &mut Organization, user : &User){
         let item = table::remove(&mut self.table, user::id(user));
         user::delete(item);
     }
@@ -58,14 +59,68 @@ module marketplace::organization{
     }
 
     // public getter methods
-    public fun username(self: &Organization): String { self.name }
+    public fun name(self: &Organization): String { self.name }
 
     public fun members(self: &Organization): &Table<ID, User> { &self.table }
+
+    public fun balance(self: &Organization) : u64 { balance::value<SUI>( &self.balance ) }
 
     public fun create_account_cap(ctx: &mut TxContext): AccountCap {
         let id = object::new(ctx);
         let owner = object::uid_to_address(&id);
         AccountCap {id, owner}
     }
+
+    public fun delete(self: Organization) {
+        let Organization {id, name : _, table : _, balance : _} = self; // TODO: figure out how to drop an organization
+        object::delete(id);
+    }
+
+    // unit tests
+    #[test]
+    public fun test_org_creation() {
+        let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
+
+        // check name, balance, table
+        assert!(string::length(&name(&test_org)) == 16 && balance(&test_org) == 0 && table::length<ID, User>(members(&test_org)) == 0, 1);
+
+        delete(test_org);
+    }
+
+    #[test]
+    public fun test_add_member() {
+        let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
+        let test_user = user::new(string::utf8(b"test user"), &mut tx_context::dummy());
+
+        add_member(&mut test_org, test_user);
+
+        assert!(table::length<ID, User>(members(&test_org)) == 1, 1);
+
+        delete(test_org);
+    }
+
+    #[test]
+    public fun test_remove_member() {
+        let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
+        let test_user1 = user::new(string::utf8(b"test user 1"), &mut tx_context::dummy());
+        let test_user2 = user::new(string::utf8(b"test user 2"), &mut tx_context::dummy());
+
+        add_member(&mut test_org, test_user1);
+        add_member(&mut test_org, test_user2);
+
+        // remove_member(&mut test_org, &);
+
+        assert!(table::length<ID, User>(members(&test_org)) == 1, 1);
+
+        delete(test_org);
+    }
+
+    #[test]
+    public fun test_donate() {}
+
+    #[test]
+    public fun test_withdraw() {}
+
+
 
 }

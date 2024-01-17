@@ -46,8 +46,11 @@ h1{
 }
 
 .page{
-  background-color: #c0edfc; 
-  padding-bottom:600px; 
+  background-color: white; 
+  padding-bottom:20px; 
+  padding-top: 20px;
+  padding-right: 4px; 
+  padding-left: 4px;  
 }
 
 .spacer{
@@ -59,7 +62,7 @@ button{
   margin: 10px; 
 }
 .loginButton{
-  background-color: white; 
+  background-color: #c0edfc;  
   border: none; 
   color: black; 
   padding: 15px 32px;
@@ -76,7 +79,10 @@ button{
 .flex-container-row{
   display:flex; 
   flex-direction: row; 
-  justify-content: space-between; 
+  justify-content: space-between;  
+}
+.organizations{
+  justify-content: space-evenly; 
 }
 .flex-container-col{
   display:flex; 
@@ -84,12 +90,12 @@ button{
   justify-content: space-between; 
 }
 .large-container{
-  width: 40%; 
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  width: 48%; 
+  /* display: block; */
+  overflow: hidden; 
+  margin: 0px; 
   height: 1000px; 
-  background-color: white; 
+  background-color: #c0edfc; 
 }
 .med-container{
   height: 45%; 
@@ -100,7 +106,7 @@ button{
   background-color: #7faab9; 
 }
 .rounded{
-  border-radius: 4px; 
+  border-radius: 8px; 
 }
 .flex-column{
   display: flex; 
