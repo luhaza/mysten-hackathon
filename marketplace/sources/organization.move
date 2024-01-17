@@ -7,6 +7,7 @@ module marketplace::organization{
     use sui::coin::{Self, Coin};
     use sui::sui::SUI;
     use sui::balance::{Self, Balance};
+    use std::vector;
 
     const EZeroAmount: u64 = 0;
 
@@ -38,8 +39,7 @@ module marketplace::organization{
     }
 
     public fun remove_member(self : &mut Organization, user : &User){
-        let item = table::remove(&mut self.table, user::id(user));
-        user::delete(item);
+        user::delete(table::remove<ID, User>(&mut self.table, user::id(user)));
     }
 
     public fun donate(self : &mut Organization, sui: Coin<SUI>){
@@ -70,9 +70,24 @@ module marketplace::organization{
         AccountCap {id, owner}
     }
 
-    public fun delete(self: Organization) {
-        let Organization {id, name : _, table : _, balance : _} = self; // TODO: figure out how to drop an organization
+    public fun delete(self: Organization, users: &mut vector<ID>) {
+        let Organization {id, name : _, table, balance} = self; // TODO: figure out how to drop an organization
         object::delete(id);
+        destroy_for_testing(balance);
+
+        while (!table::is_empty(&table)) {
+            user::delete(table::remove(&mut table, vector::pop_back(users)));
+        };
+
+        table::destroy_empty(table);
+    }
+
+    #[test_only]
+    /// Destroy a `Balance` of any coin for testing purposes.
+    public fun destroy_for_testing<T>(self: Balance<T>): u64 {
+        // TODO: ask Jian about this error
+        let Balance { value } = self;
+        value
     }
 
     // unit tests
@@ -81,9 +96,9 @@ module marketplace::organization{
         let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
 
         // check name, balance, table
-        assert!(string::length(&name(&test_org)) == 16 && balance(&test_org) == 0 && table::length<ID, User>(members(&test_org)) == 0, 1);
+        assert!(string::length(&name(&test_org)) == 16 && balance(&test_org) == 0 && table::length(members(&test_org)) == 0, 1);
 
-        delete(test_org);
+        delete(test_org, &mut vector::empty<ID>());
     }
 
     #[test]
@@ -91,11 +106,14 @@ module marketplace::organization{
         let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
         let test_user = user::new(string::utf8(b"test user"), &mut tx_context::dummy());
 
+        let users = vector::empty<ID>();
+        vector::push_back(&mut users, user::id(&test_user));
+
         add_member(&mut test_org, test_user);
 
-        assert!(table::length<ID, User>(members(&test_org)) == 1, 1);
+        assert!(table::length(members(&test_org)) == 1, 1);
 
-        delete(test_org);
+        delete(test_org, &mut users);
     }
 
     #[test]
@@ -104,22 +122,41 @@ module marketplace::organization{
         let test_user1 = user::new(string::utf8(b"test user 1"), &mut tx_context::dummy());
         let test_user2 = user::new(string::utf8(b"test user 2"), &mut tx_context::dummy());
 
+        let users = vector::empty<ID>();
+        vector::push_back(&mut users, user::id(&test_user1));
+        vector::push_back(&mut users, user::id(&test_user2));
+
         add_member(&mut test_org, test_user1);
         add_member(&mut test_org, test_user2);
 
-        // remove_member(&mut test_org, &);
+        // TODO: maybe have to edit remove_member func bc of copy error (ask Jian)
+        remove_member(&mut test_org, &test_user2);
 
-        assert!(table::length<ID, User>(members(&test_org)) == 1, 1);
+        // check that length of table is 1
+        // check that test_user2 still exists
+        assert!(table::length(members(&test_org)) == 1 && string::length(&user::username(&test_user2)) == 11 && user::points(&test_user2) == 0, 1);
 
-        delete(test_org);
+        user::delete(test_user2);
+        delete(test_org, &mut users);
     }
 
     #[test]
-    public fun test_donate() {}
+    public fun test_donate() {
+        let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
+
+        let balance = balance::zero<SUI>();
+        let another = balance::create_for_testing(1000);
+        balance::join(&mut balance, another);
+
+        assert!(balance::value(&balance) == 1000, 0);
+
+        let sui = coin::from_balance<SUI>(balance, &mut tx_context::dummy());
+
+        donate(&mut test_org, sui);
+
+        delete(test_org, &mut vector::empty<ID>());
+    }
 
     #[test]
     public fun test_withdraw() {}
-
-
-
 }
