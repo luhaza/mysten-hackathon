@@ -7,7 +7,7 @@ import OrganizationsList from './components/OrganizationsList'
 function App() {
   return (
     <div className="page">
-      <div className="flex-container"> 
+      <div className="flex-container-row"> 
         <UserProfile/>
         <OrganizationsList/>
       </div>

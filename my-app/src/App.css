@@ -73,9 +73,14 @@ button{
 .container{
   background-color: white; 
 }
-.flex-container{
+.flex-container-row{
   display:flex; 
   flex-direction: row; 
+  justify-content: space-between; 
+}
+.flex-container-col{
+  display:flex; 
+  flex-direction: column; 
   justify-content: space-between; 
 }
 .large-container{
@@ -86,13 +91,24 @@ button{
   height: 1000px; 
   background-color: white; 
 }
-
+.med-container{
+  height: 40%; 
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #7faab9; 
+}
 .rounded{
   border-radius: 4px; 
 }
 .flex-column{
   display: flex; 
   flex-direction: column; 
+}
+.flex-row{
+  display: flex; 
+  flex-direction: row; 
 }
 .user-container{
   margin: 10%;
