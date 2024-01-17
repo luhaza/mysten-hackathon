@@ -74,7 +74,7 @@ module marketplace::organization{
     public fun delete(self: Organization, users: &mut vector<ID>) {
         let Organization {id, name : _, table, balance} = self;
         object::delete(id);
-        destroy_for_testing(balance);
+        balance::destroy_for_testing(balance);
 
         while (!table::is_empty(&table)) {
             user::delete(table::remove(&mut table, vector::pop_back(users)));
@@ -84,11 +84,8 @@ module marketplace::organization{
     }
 
     #[test_only]
-    /// Destroy a `Balance` of any coin for testing purposes.
-    public fun destroy_for_testing<T>(self: Balance<T>): u64 {
-        // TODO: ask Jian about this error
-        let Balance { value } = self;
-        value
+    public fun delete_coin(coin: Coin<SUI>) {
+        coin::burn_for_testing(coin);
     }
 
     // unit tests
@@ -177,6 +174,8 @@ module marketplace::organization{
         // check balance
         assert!(balance(&test_org) == EZeroAmount, 1);
 
+        
         delete(test_org, &mut vector::empty<ID>());
+        delete_coin(withdrawn_coin);
     }
 }
