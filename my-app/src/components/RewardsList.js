@@ -6,7 +6,18 @@ import '../App.css';
 const RewardsList = () => {
     return (
         <div className='flex-row med-container'>
-            <h2>Hello</h2>
+            <div className='grid-item'></div>
+            <div className='grid-item'></div>
+            <div className='grid-item'></div>
+            <div className='grid-item'></div>
+            <div className='grid-item'></div>
+
+            <div className='grid-item'></div>
+            <div className='grid-item'></div>
+            <div className='grid-item'></div>
+            <div className='grid-item'></div>
+            <div className='grid-item'></div>
+            
         </div>
     )
 }
