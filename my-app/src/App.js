@@ -7,12 +7,7 @@ import OrganizationsList from './components/OrganizationsList'
 function App() {
   return (
     <div className="page">
-      <div className="flex-container">
-      <div className="flex-column"> </div>
-      <div className="flex-column">
-        <button class="button loginButton"> Sign In to Sui Wallet </button>
-      </div>
-      </div>
+      <button className="button loginButton"> Sign In to Sui Wallet </button>
       <div className="spacer"></div>
       <MyBox />
       <MyButton />
@@ -28,7 +23,7 @@ function MyButton() {
 
 function MyBox(){
   return (
-    <div className="flex-container organizations">
+    <div className="flex-container-row organizations">
       <UserProfile/>
       <OrganizationsList/>
     </div>
