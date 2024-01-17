@@ -10,7 +10,7 @@ const CreditsButton = () => {
 
     return (
         <div style={{}}>
-            <button onClick={toggleCredits} className="credits-button"> 
+            <button onClick={toggleCredits} class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-10% px-5% rounded m-4">
                 Show Credits
             </button>
 

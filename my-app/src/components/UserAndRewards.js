@@ -9,12 +9,6 @@ const UserAndRewards = () => {
             <UserProfile/>
             <RewardsList/>
         </div>
-        // <div className="flex-column flex-container-col large-container white-background rounded"> 
-        //     <div className="flex-row med-container rounded">
-        //         <h2> User Name</h2>
-        //     </div>
-        //     <RewardsList/>
-        // </div>
     )
 }
 
