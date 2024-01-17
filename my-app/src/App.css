@@ -70,11 +70,25 @@ button{
   border-radius: 4px; 
 }
 
-
+.container{
+  background-color: white; 
+}
 .flex-container{
   display:flex; 
   flex-direction: row; 
   justify-content: space-between; 
+}
+.large-container{
+  width: 40%; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 1000px; 
+  background-color: white; 
+}
+
+.rounded{
+  border-radius: 4px; 
 }
 .flex-column{
   display: flex; 

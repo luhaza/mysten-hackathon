@@ -26,8 +26,13 @@ function MyButton() {
 
 function MyBox(){
   return (
-    <div className="page">
-      {/* hehe */}
+    <div className="flex-container">
+      <div className="flex-column large-container rounded"> 
+        Your Avatar
+      </div>
+      <div className="flex-column large-container rounded"> 
+        Donations
+      </div>
     </div>
   ); 
 }
