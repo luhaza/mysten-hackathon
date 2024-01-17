@@ -1,0 +1,21 @@
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-grid{
+    display: grid;
+    flex-wrap: wrap;
+}
+
+.grid-item {
+    flex: 1; 
+    min-width: 10%;
+    width: 10%;
+    min-height: 40%;
+    height: 40%;
+    margin: 5%; 
+    box-sizing: border-box; 
+    border: 1px solid #ccc; 
+    padding: 5%; 
+  }

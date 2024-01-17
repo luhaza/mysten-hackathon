@@ -11,6 +11,7 @@ module marketplace::organization{
 
     const EZeroAmount: u64 = 0;
 
+    // account capability
     struct AccountCap has key, store {
         id: UID,
         /// The owner of this AccountCap. Note: this is
