@@ -51,7 +51,7 @@ module marketplace::organization{
         balance::join(&mut self.balance, sui_gift);
     }
 
-    public fun withdraw(self : &mut Organization, quantity : u64, ctx: &mut TxContext) : Coin<SUI>{
+    public fun withdraw(self : &mut Organization, quantity : u64, ctx: &mut TxContext) : Coin<SUI> {
         let bal = balance::split(&mut self.balance, quantity);
 
         //convert the balance into a coin and return it 
@@ -159,5 +159,24 @@ module marketplace::organization{
     }
 
     #[test]
-    public fun test_withdraw() {}
+    public fun test_withdraw() {
+        let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
+        let balance = balance::zero<SUI>();
+        let another = balance::create_for_testing(1000);
+        balance::join(&mut balance, another);
+
+        assert!(balance::value(&balance) == 1000, 0);
+
+        let sui = coin::from_balance<SUI>(balance, &mut tx_context::dummy());
+
+        donate(&mut test_org, sui);
+
+        let withdrawn_coin = withdraw(&mut test_org, 1000, &mut tx_context::dummy());
+
+        assert!(coin::value(&mut withdrawn_coin) == 1000, 1);
+        // check balance
+        assert!(balance(&test_org) == EZeroAmount, 1);
+
+        delete(test_org, &mut vector::empty<ID>());
+    }
 }
