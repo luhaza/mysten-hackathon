@@ -22,10 +22,52 @@
     text-align: left; 
     padding: 20px; 
 }
-th,t{
+th{
+    border-bottom: 1px solid black; 
+    font-size: 22px;
+}
+tr{
     border-bottom: 1px solid black; 
 }
-.donation-row{
-    padding: 20px; 
-    background-color: green; 
+td{
+    /* display: flex; 
+    flex-direction: column; 
+    border-radius: 8px;  */
 }
+
+.donation-row{
+    padding: 50px; 
+    font-size: 20px; 
+    background-color: lightblue; 
+    border-radius: 50px;  
+}
+.task-progress {
+    margin: 1.5rem 0;
+}
+
+.progress {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    border-radius: 10px;
+    height: 1rem;
+    width:100%; 
+  }
+
+  .progress::-webkit-progress-bar {
+    background-color: #f0f0f0;
+  }
+
+  .progress::-webkit-progress-bar,
+  .progress::-webkit-progress-value {
+    border-radius: 10px;
+  }
+
+  .progress::-moz-progress-bar {
+    border-radius: 10px;
+  }
+
+  .progress1::-webkit-progress-value {
+    background: #185ee2;
+  }
