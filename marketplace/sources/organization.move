@@ -72,7 +72,7 @@ module marketplace::organization{
     }
 
     public fun delete(self: Organization, users: &mut vector<ID>) {
-        let Organization {id, name : _, table, balance} = self; // TODO: figure out how to drop an organization
+        let Organization {id, name : _, table, balance} = self;
         object::delete(id);
         destroy_for_testing(balance);
 
