@@ -38,7 +38,7 @@ td{
 .donation-row{
     padding: 50px; 
     font-size: 20px; 
-    background-color: lightblue; 
+    background-color: #60a5fa; 
     border-radius: 50px;  
 }
 .task-progress {
@@ -70,4 +70,22 @@ td{
 
   .progress1::-webkit-progress-value {
     background: #185ee2;
+  }
+
+  .popup-btn {
+    padding: 10px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .popup-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
   }
