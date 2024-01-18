@@ -2,9 +2,10 @@ import React from 'react'
 import '../App.css';
 import './OrganizationsListStyle.css';
 
+
 const OrganizationsList = () => {
     return (
-        <div className="flex-column large-container rounded org-info">
+        <div className="flex-column large-container org-info">
             <h2 className="orgHeader"> Current Fundraisers</h2>
             <FundraiserBlock />
         </div>
@@ -61,7 +62,7 @@ function DonationBlock() {
                  </div>
                  <td></td>
                  <td>
-                    Donate Here
+                    <button class="popup-btn" onclick="">Donate HERE</button>
                 </td>
             </tr>
         </>
