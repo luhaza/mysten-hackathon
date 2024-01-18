@@ -3,6 +3,8 @@ import '../App.css';
 import './OrganizationsListStyle.css';
 import DonateButton from './DonateButton'
 
+
+
 const OrganizationsList = () => {
     return (
         <div className="flex-column large-container org-info">
