@@ -11,12 +11,10 @@ const DonateButton  = () => {
 	const currentAccount = useCurrentAccount();
  
     const donate = () => {
-        let txb = new TransactionBlock();
-        const [coin] = txb.splitCoins(txb.gas, [txb.pure.u64(1000)]);
-        
+        let txb = new TransactionBlock();        
         txb.moveCall({
-            target: '0x2da8cd5a514de9150ed7019e1e1ccf6ec4f23f272162a8389813d5a56fd1b151::organization::donate', 
-            arguments: [txb.object('0x62be33c3b976258aebd029d44b23154d5862d9e2b5a100a17c43f0c817214f4e'), coin]
+            target: '0x2da8cd5a514de9150ed7019e1e1ccf6ec4f23f272162a8389813d5a56fd1b151::organization::balance', 
+            arguments: [txb.object('0x62be33c3b976258aebd029d44b23154d5862d9e2b5a100a17c43f0c817214f4e')]
         });
         return txb;
     }
