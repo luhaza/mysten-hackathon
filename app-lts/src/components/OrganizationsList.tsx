@@ -1,6 +1,8 @@
 import React from 'react'
 import '../App.css';
 import './OrganizationsListStyle.css';
+import { TransactionBlock } from "@mysten/sui.js/transactions";
+
 
 
 const OrganizationsList = () => {
@@ -34,6 +36,13 @@ function FundraiserBlock() { //need parameters
 
 
 function DonationBlock() {
+    // const handleDonation = async () => {
+    //     // value # of donations shown on each donation block
+    //     // call add points for the user. 
+    // }
+
+    // let transactionBlock = new TransactionBlock(); 
+    // for 
     return (
         <>
             <tr className="donation-row">
