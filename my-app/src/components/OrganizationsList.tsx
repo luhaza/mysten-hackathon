@@ -49,8 +49,8 @@ function DonationBlock() {
             </tr>
              <tr> 
                 
-                 <div class="task-progress">
-                     <progress id="progressBar" class="progress progress1" max="100" value="65"></progress>
+                 <div className="task-progress">
+                     <progress id="progressBar" className="progress progress1" max="100" value="65"></progress>
 
                      {/* <script>
                         document.addEventLister("DOMContentLoaded", function () {
@@ -62,7 +62,7 @@ function DonationBlock() {
                  </div>
                  <td></td>
                  <td>
-                    <button class="popup-btn" onclick="">Donate HERE</button>
+                    <button className="popup-btn">Donate HERE</button>
                 </td>
             </tr>
         </>

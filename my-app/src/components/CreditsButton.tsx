@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './CreditsButton.css';
 
-const CreditsButton = ({ credits }) => {
+interface CreditsButtonProps {
+    credits : number;
+}
+
+const CreditsButton : React.FC<CreditsButtonProps>= ({ credits }) => {
     const [showCredits, setShowCredits] = useState(true);
 
     const toggleCredits = () => {
@@ -11,7 +15,7 @@ const CreditsButton = ({ credits }) => {
     return (
         <div className="flex flex-col items-center justify-center text-white font-bold">
             
-            <button onClick={toggleCredits} class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-10% px-5% rounded m-4 sm:text-md md:text-lg lg:text-xl">
+            <button onClick={toggleCredits} className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-10% px-5% rounded m-4 sm:text-md md:text-lg lg:text-xl">
                 Show Credits
             </button>
             {showCredits && (

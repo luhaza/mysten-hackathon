@@ -1,8 +1,8 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import UserAndRewards from './components/UserAndRewards'
 import OrganizationsList from './components/OrganizationsList'
-import ConnectButton from '@mysten/dapp-kit'; 
+import { ConnectButton } from '@mysten/dapp-kit'; 
 
 
 function App() {

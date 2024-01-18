@@ -1,6 +1,15 @@
 import React, { useState } from 'react'
 
-const StoreItem = ({r, c, name, price, credits, setCredits}) => {
+interface CreditsButtonProps {
+    r : string,
+    c : string,
+    name : string, 
+    price : number,
+    credits : number, 
+    setCredits : React.Dispatch<React.SetStateAction<number>>,
+}
+
+const StoreItem : React.FC<CreditsButtonProps> = ({r, c, name, price, credits, setCredits}) => {
     const handleBuy = () => {
         if (credits - price >= 0){
             const newCredits = credits - price;
