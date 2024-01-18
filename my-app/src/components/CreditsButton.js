@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CreditsButton.css';
 
-const CreditsButton = () => {
+const CreditsButton = ({ credits }) => {
     const [showCredits, setShowCredits] = useState(true);
 
     const toggleCredits = () => {
@@ -9,14 +9,14 @@ const CreditsButton = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center text-white font-bold">
             
             <button onClick={toggleCredits} class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-10% px-5% rounded m-4 sm:text-md md:text-lg lg:text-xl">
                 Show Credits
             </button>
             {showCredits && (
                 <div className="credits-container" style={{display:'block'}}>
-                    <h3>0.0</h3>
+                    <h3>Credits: ${credits}</h3>
                 </div>
             )}
 
