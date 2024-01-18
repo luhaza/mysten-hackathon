@@ -15,7 +15,7 @@
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/themes": "^2.0.0",
-    "@tanstack/react-query": "^5.0.0",
+    "@tanstack/react-query": "^5.17.15",
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.33",
     "react": "^18.2.0",
@@ -24,6 +24,8 @@
     "vite-plugin-windicss": "^1.9.3"
   },
   "devDependencies": {
+    "@mysten/dapp-kit": "0.11.1",
+    "@mysten/sui.js": "0.49.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
