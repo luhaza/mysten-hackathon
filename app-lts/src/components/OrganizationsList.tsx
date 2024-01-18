@@ -2,7 +2,7 @@ import React from 'react'
 import '../App.css';
 import './OrganizationsListStyle.css';
 import DonateButton from './DonateButton'
-
+import TotalDonated from './TotalDonated'
 
 
 const OrganizationsList = () => {
@@ -54,7 +54,8 @@ const DonationBlock : React.FC<DonationBlockProps> = ({name}) => {
              <tr> 
                 
                  <div className="task-progress">
-                     <progress id="progressBar" className="progress progress1" max="100" value="65"></progress>
+                    {/* <TotalDonated/> */}
+                    {/* <progress id="progressBar" className="progress progress1" max="100" value="65"></progress> */}
 
                      {/* <script>
                         document.addEventLister("DOMContentLoaded", function () {

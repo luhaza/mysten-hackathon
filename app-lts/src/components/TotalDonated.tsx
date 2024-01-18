@@ -24,7 +24,7 @@ const DonateButton  = () => {
 	return (
 		<div style={{ padding: 20 }}>
             {!currentAccount && (
-                <h2> Connect Wallet to Donate</h2>
+                <h2> Sign in to Donate</h2>
             )}
 
 			{currentAccount && (
@@ -42,9 +42,6 @@ const DonateButton  = () => {
 											console.log('executed transaction block', result);
 											setDigest(result.digest);
 										},
-                                        onError: (res) => {
-                                            console.log(res);
-                                        }
 									},
 								);
 							}}
@@ -52,7 +49,6 @@ const DonateButton  = () => {
 							DONATE
 						</button>
 					</div>
-                    <div>Digest: {digest}</div>
 				</>
 			)}
 		</div>
