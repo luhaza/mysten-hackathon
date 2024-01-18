@@ -1,3 +1,4 @@
+#[allow(unused_use)]
 module marketplace::user {
     use std::string::{String,Self};
     use std::vector;

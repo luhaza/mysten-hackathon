@@ -1,3 +1,4 @@
+#[allow(unused_use)]
 module marketplace::organization{
     use std::string::{String,Self};
     use sui::object::{Self, UID, ID};
@@ -8,6 +9,9 @@ module marketplace::organization{
     use sui::sui::SUI;
     use sui::balance::{Self, Balance};
     use std::vector;
+
+    #[test_only]
+    use sui::test_scenario::{Self as test, Scenario, next_tx, ctx, end, TransactionEffects};
 
     const EZeroAmount: u64 = 0;
 
@@ -36,7 +40,7 @@ module marketplace::organization{
     }
 
     public fun add_member(self : &mut Organization, user : User) {
-        table::add(&mut self.table, user::id(&mut user), user);
+        table::add(&mut self.table, user::id(&user), user);
     }
 
     // remove by id
@@ -123,27 +127,33 @@ module marketplace::organization{
 
     #[test]
     public fun test_remove_member() {
-        let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
-        let test_user1 = user::new(string::utf8(b"test user 1"), &mut tx_context::dummy());
-        //let test_user2 = user::new(string::utf8(b"test user 2"), &mut tx_context::dummy());
+        let test = test::begin(@0x1);
+        {
+      let test_org = new(string::utf8(b"Williams College"), test::ctx(&mut test));
+        let test_user1 = user::new(string::utf8(b"test user 1"), test::ctx(&mut test));
+        let test_user2 = user::new(string::utf8(b"test user 2"), test::ctx(&mut test));
 
         let users = vector::empty<ID>();
         vector::push_back(&mut users, user::id(&test_user1));
-        //vector::push_back(&mut users, user::id(&test_user2));
+        vector::push_back(&mut users, user::id(&test_user2));
 
         add_member(&mut test_org, test_user1);
-        //add_member(&mut test_org, test_user2);
+        std::debug::print(&b"0");
+        add_member(&mut test_org, test_user2);
+        std::debug::print(&b"0");
 
         let user_id = vector::pop_back(&mut users);
         let del_user = remove_member(&mut test_org, user_id);
-
+        std::debug::print(members(&test_org));
+        
         // check that length of table is 1
         // check that test_user2 still exists
-        assert!(table::length(members(&test_org)) == 0, 1);
-        // print(table::length(members(&test_org)));
+        assert!(table::length(members(&test_org)) == 1, 1);
 
         user::delete(del_user);
         delete(test_org, &mut users);
+        };
+        end(test);
     }
 
     #[test]
