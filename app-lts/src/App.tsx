@@ -9,7 +9,6 @@ function App() {
     <div className="page">
       <div className="flex-container-row">
         <ConnectButton />
-        <button className="button loginButton"> Sign In to Sui Wallet </button>
       </div>
       
       <div className="spacer"></div>
