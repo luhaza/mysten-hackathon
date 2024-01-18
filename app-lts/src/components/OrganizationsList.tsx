@@ -1,7 +1,7 @@
 import React from 'react'
 import '../App.css';
 import './OrganizationsListStyle.css';
-
+import DonateButton from './DonateButton'
 
 const OrganizationsList = () => {
     return (
@@ -23,22 +23,24 @@ function FundraiserBlock() { //need parameters
                 <th>Goal</th>
                 <th>Current Donation %</th>
             </tr>
-            <DonationBlock />
-            <DonationBlock />
-            <DonationBlock />
-            <DonationBlock />
+            <DonationBlock name={"Williams"}/>
+            <DonationBlock name={"Mysten"}/>
+            <DonationBlock name={"Marcus"}/>
         </table>
       </div>  
     );
   }
 
+interface DonationBlockProps {
+    name : string
+}
 
-function DonationBlock() {
+const DonationBlock : React.FC<DonationBlockProps> = ({name}) => {
     return (
         <>
             <tr className="donation-row">
                 <td className="donation-container">
-                        <td>Fake Organization</td>
+                        <td>{name}</td>
                 </td>
                 <td className="donation-container">
                         <td>Goal</td>
@@ -62,7 +64,8 @@ function DonationBlock() {
                  </div>
                  <td></td>
                  <td>
-                    <button className="popup-btn">Donate HERE</button>
+                    <DonateButton/>
+                    {/* <button className="popup-btn">Donate HERE</button> */}
                 </td>
             </tr>
         </>

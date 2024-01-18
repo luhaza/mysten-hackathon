@@ -1,4 +1,5 @@
-import { TransactionBlock } from "@mysten/sui.js/transaction";
+import { TransactionBlock } from "@mysten/sui.js/transactions";
+
 <form
   onSubmit={(e) => {
     e.preventDefault();

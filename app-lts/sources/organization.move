@@ -9,6 +9,7 @@ module marketplace::organization{
     use sui::sui::SUI;
     use sui::balance::{Self, Balance};
     use std::vector;
+    use sui::transfer;
 
     #[test_only]
     use sui::test_scenario::{Self as test, end};
@@ -20,7 +21,8 @@ module marketplace::organization{
         id: UID,
         /// The owner of this AccountCap. Note: this is
         /// derived from an object ID, not a user address
-        owner: address
+        owner: address,
+        // org: ID,
     }
 
     struct Organization has key {
@@ -30,13 +32,14 @@ module marketplace::organization{
         balance : Balance<SUI>,
     }
 
-    public fun new(_name : String, ctx : &mut TxContext) : Organization {
-        Organization {
+    //
+    public fun new(_name : String, ctx : &mut TxContext) {
+       transfer::share_object(Organization {
             id : object::new(ctx),
             name: _name,
             table : table::new<ID, User>(ctx),
             balance : balance::zero<SUI>(),
-        }
+        });
     }
 
     public fun add_member(self : &mut Organization, user : User) {
@@ -56,7 +59,6 @@ module marketplace::organization{
 
     public fun withdraw(self : &mut Organization, quantity : u64, ctx: &mut TxContext) : Coin<SUI> {
         let bal = balance::split(&mut self.balance, quantity);
-
         //convert the balance into a coin and return it
         coin::from_balance<SUI>(bal, ctx)
     }
