@@ -18,9 +18,9 @@ const StoreItem : React.FC<CreditsButtonProps> = ({r, c, name, price, credits, s
     }
 
     return (
-        <div className={`row-start-${r} col-start-${c} flex flex-col justify-center items-center text-white font-bold bg-red-500 p-4 w-25 h-32`}>
+        <div className={`row-start-${r} col-start-${c} flex flex-col justify-center items-center text-white font-bold rounded-lg bg-red-500 p-4 w-25 h-32`}>
             <h2>{name}</h2>
-            <button onClick={handleBuy} className="bg-red-300 hover:bg-red-600 text-white font-bold py-10% px-5% rounded m-4 sm:text-md md:text-lg lg:text-xl">
+            <button onClick={handleBuy} className="bg-red-300 hover:bg-red-600 text-white font-bold py-10% px-5% rounded m-1 sm:text-md md:text-lg lg:text-xl">
                 Buy Item
             </button>
             <h3>Price: ${price}</h3>
