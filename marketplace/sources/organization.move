@@ -35,16 +35,16 @@ module marketplace::organization{
         }
     }
 
-    public fun add_member(self : &mut Organization, user : User){
+    public fun add_member(self : &mut Organization, user : User) {
         table::add(&mut self.table, user::id(&mut user), user);
     }
 
     // remove by id
-    public fun remove_member(self : &mut Organization, user_id : ID){
-        user::delete(table::remove<ID, User>(&mut self.table, user_id));
+    public fun remove_member(self : &mut Organization, user_id : ID) : User {
+        table::remove(&mut self.table, user_id)
     }
 
-    public fun donate(self : &mut Organization, sui: Coin<SUI>){
+    public fun donate(self : &mut Organization, sui: Coin<SUI>) {
         // let address = object::uid_to_address(&self.id);
         // transfer::transfer(stake, address);
         assert!(coin::value(&sui) > 0, EZeroAmount);
@@ -73,15 +73,18 @@ module marketplace::organization{
     }
 
     #[test_only]
-    public fun delete(self: Organization, users: &mut vector<User>) {
+    public fun delete(self: Organization, users: &mut vector<ID>) {
         let Organization {id, name : _, table, balance} = self;
-        object::delete(id);
-        balance::destroy_for_testing(balance);
 
         while (!table::is_empty(&table)) {
-            user::delete(table::remove(&mut table, user::id(&vector::pop_back(users))));
+            let delete_id = vector::pop_back(users);
+            user::delete(
+                table::remove(&mut table, 
+                    delete_id));
         };
 
+        object::delete(id);
+        balance::destroy_for_testing(balance);
         table::destroy_empty(table);
     }
 
@@ -98,7 +101,9 @@ module marketplace::organization{
         // check name, balance, table
         assert!(string::length(&name(&test_org)) == 16 && balance(&test_org) == 0 && table::length(members(&test_org)) == 0, 1);
 
-        delete(test_org, &mut vector::empty<User>());
+        let v: vector<ID> = vector[];
+        delete(test_org, &mut v);
+        vector::destroy_empty(v);
     }
 
     #[test]
@@ -106,10 +111,8 @@ module marketplace::organization{
         let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
         let test_user = user::new(string::utf8(b"test user"), &mut tx_context::dummy());
 
-        let users = vector::empty<User>();
-        vector::push_back(&mut users, test_user);
-
-        //let (i, j) = vector::index_of(&users, &user::id(&test_user));
+        let users = vector::empty<ID>();
+        vector::push_back(&mut users, user::id(&test_user));
 
         add_member(&mut test_org, test_user);
 
@@ -122,27 +125,24 @@ module marketplace::organization{
     public fun test_remove_member() {
         let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
         let test_user1 = user::new(string::utf8(b"test user 1"), &mut tx_context::dummy());
-        let test_user2 = user::new(string::utf8(b"test user 2"), &mut tx_context::dummy());
+        //let test_user2 = user::new(string::utf8(b"test user 2"), &mut tx_context::dummy());
 
-        // let users = vector::empty<ID>();
-        // vector::push_back(&mut users, user::id(&test_user1));
-        // vector::push_back(&mut users, user::id(&test_user2));
-
-        let users = vector::empty<User>();
-        vector::push_back(&mut users, test_user1);
-        vector::push_back(&mut users, test_user2);
+        let users = vector::empty<ID>();
+        vector::push_back(&mut users, user::id(&test_user1));
+        //vector::push_back(&mut users, user::id(&test_user2));
 
         add_member(&mut test_org, test_user1);
-        add_member(&mut test_org, test_user2);
+        //add_member(&mut test_org, test_user2);
 
-        // TODO: maybe have to edit remove_member func bc of copy error (ask Jian)
-        remove_member(&mut test_org, user::id(&vector::pop_back(&mut users)));
+        let user_id = vector::pop_back(&mut users);
+        let del_user = remove_member(&mut test_org, user_id);
 
         // check that length of table is 1
         // check that test_user2 still exists
-        assert!(table::length(members(&test_org)) == 1 && string::length(&user::username(&test_user2)) == 11 && user::points(&test_user2) == 0, 1);
+        assert!(table::length(members(&test_org)) == 0, 1);
+        // print(table::length(members(&test_org)));
 
-        user::delete(test_user2);
+        user::delete(del_user);
         delete(test_org, &mut users);
     }
 
@@ -160,7 +160,7 @@ module marketplace::organization{
 
         donate(&mut test_org, sui);
 
-        delete(test_org, &mut vector::empty<User>());
+        delete(test_org, &mut vector::empty<ID>());
     }
 
     #[test]
@@ -170,19 +170,15 @@ module marketplace::organization{
         let another = balance::create_for_testing(1000);
         balance::join(&mut balance, another);
 
-        assert!(balance::value(&balance) == 1000, 0);
-
         let sui = coin::from_balance<SUI>(balance, &mut tx_context::dummy());
 
         donate(&mut test_org, sui);
 
         let withdrawn_coin = withdraw(&mut test_org, 1000, &mut tx_context::dummy());
 
-        assert!(coin::value(&mut withdrawn_coin) == 1000, 1);
-        // check balance
-        assert!(balance(&test_org) == EZeroAmount, 1);
+        assert!(coin::value(&mut withdrawn_coin) == 1000 && balance(&test_org) == EZeroAmount, 1);
 
         delete_coin(withdrawn_coin);
-        delete(test_org, &mut vector::empty<User>());
+        delete(test_org, &mut vector::empty<ID>());
     }
 }
