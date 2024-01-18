@@ -95,20 +95,18 @@ module marketplace::organization{
         coin::burn_for_testing(coin);
     }
 
-
     // unit tests
     #[test]
     public fun test_org_creation() {
         let test_org = new(string::utf8(b"Williams College"), &mut tx_context::dummy());
 
         // check name, balance, table
-        assert!(string::length(&name(&test_org)) == 16 && balance(&test_org) == 0 && table::length(members(&test_org)) == 0, 1);
+        assert!(string::length(&name(&test_org)) == 16 && balance(&test_org) == 0 && table::length(members(&test_org)) == 0, 0);
 
         let v: vector<ID> = vector[];
         delete(test_org, &mut v);
         vector::destroy_empty(v);
     }
-
 
     #[test]
     public fun test_add_member() {
@@ -120,11 +118,10 @@ module marketplace::organization{
 
         add_member(&mut test_org, test_user);
 
-        assert!(table::length(members(&test_org)) == 1, 1);
+        assert!(table::length(members(&test_org)) == 1, 0);
 
         delete(test_org, &mut users);
     }
-
 
     #[test]
     public fun test_remove_member() {
@@ -145,14 +142,13 @@ module marketplace::organization{
             
             // check that length of table is 1
             // check that test_user2 still exists
-            assert!(table::length(members(&test_org)) == 1, 1);
+            assert!(table::length(members(&test_org)) == 1, 0);
 
             user::delete(del_user);
             delete(test_org, &mut users); 
             };
         end(test);
     }
-
 
     #[test]
     public fun test_donate() {
@@ -162,14 +158,13 @@ module marketplace::organization{
         let another = balance::create_for_testing(1000);
         balance::join(&mut balance, another);
 
-        assert!(balance::value(&balance) == 1000, 0);
-
         let sui = coin::from_balance<SUI>(balance, &mut tx_context::dummy());
         donate(&mut test_org, sui);
 
+        assert!(balance(&test_org) == 1000, 0);
+
         delete(test_org, &mut vector::empty<ID>());
     }
-
 
     #[test]
     public fun test_withdraw() {
@@ -184,7 +179,7 @@ module marketplace::organization{
 
         let withdrawn_coin = withdraw(&mut test_org, 1000, &mut tx_context::dummy());
 
-        assert!(coin::value(&withdrawn_coin) == 1000 && balance(&test_org) == EZeroAmount, 1);
+        assert!(coin::value(&withdrawn_coin) == 1000 && balance(&test_org) == EZeroAmount, 0);
 
         delete_coin(withdrawn_coin);
         delete(test_org, &mut vector::empty<ID>());
