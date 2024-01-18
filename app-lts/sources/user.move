@@ -1,3 +1,4 @@
+#[allow(unused_use)]
 module marketplace::user {
     use std::string::{String,Self};
     use std::vector;
@@ -38,7 +39,6 @@ module marketplace::user {
     }
 
     // unit tests
-
     #[test]
     public fun test_user_creation() {
         let test_user = new(string::utf8(b"test user"), &mut tx_context::dummy());

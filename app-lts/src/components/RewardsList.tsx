@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './RewardsList.css';
 import '../index.css'
 import '../App.css';
@@ -12,7 +12,7 @@ const RewardsList = () => {
             <div className="flex flex-col row-start-1 col-start-2 col-end-4 justify-center items-center">
                 <h2 className="text-white font-bold text-5xl">Rewards Store</h2>
             </div>
-            <div className="row-start-2 col-start-1 bg-blue-500 p-4 w-25 h-32">
+            <div className="row-start-2 col-start-1 bg-blue-500 p-4 w-25 h-32 rounded-lg">
                 <CreditsButton credits={credits}/>
             </div>
             <StoreItem r={'2'} c={'2'} name={"Apple"} price={5} credits={credits} setCredits={setCredits}/>
