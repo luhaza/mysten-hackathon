@@ -11,7 +11,7 @@ module marketplace::organization{
     use std::vector;
 
     #[test_only]
-    use sui::test_scenario::{Self as test, Scenario, next_tx, ctx, end, TransactionEffects};
+    use sui::test_scenario::{Self as test, end};
 
     const EZeroAmount: u64 = 0;
 
@@ -184,7 +184,7 @@ module marketplace::organization{
 
         let withdrawn_coin = withdraw(&mut test_org, 1000, &mut tx_context::dummy());
 
-        assert!(coin::value(&mut withdrawn_coin) == 1000 && balance(&test_org) == EZeroAmount, 1);
+        assert!(coin::value(&withdrawn_coin) == 1000 && balance(&test_org) == EZeroAmount, 1);
 
         delete_coin(withdrawn_coin);
         delete(test_org, &mut vector::empty<ID>());
