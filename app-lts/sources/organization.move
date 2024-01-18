@@ -49,8 +49,6 @@ module marketplace::organization{
     }
 
     public fun donate(self : &mut Organization, sui: Coin<SUI>) {
-        // let address = object::uid_to_address(&self.id);
-        // transfer::transfer(stake, address);
         assert!(coin::value(&sui) > 0, EZeroAmount);
         let sui_gift = coin::into_balance(sui);
         balance::join(&mut self.balance, sui_gift);
@@ -140,13 +138,10 @@ module marketplace::organization{
             vector::push_back(&mut users, user::id(&test_user2));
 
             add_member(&mut test_org, test_user1);
-            std::debug::print(&b"0");
             add_member(&mut test_org, test_user2);
-            std::debug::print(&b"0");
-
+        
             let user_id = vector::pop_back(&mut users);
             let del_user = remove_member(&mut test_org, user_id);
-            std::debug::print(members(&test_org));
             
             // check that length of table is 1
             // check that test_user2 still exists
