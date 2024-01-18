@@ -18,7 +18,7 @@ const RewardsList = () => {
             <StoreItem r={'2'} c={'2'} name={"Apple"} price={5} credits={credits} setCredits={setCredits}/>
             <StoreItem r={'2'} c={'3'} name={"Hat"} price={10} credits={credits} setCredits={setCredits}/>
             <StoreItem r={'2'} c={'4'} name={"Celcius"} price={15} credits={credits} setCredits={setCredits}/>
-            <StoreItem r={'3'} c={'1'} name={"Water Bottle"} price={20} credits={credits} setCredits={setCredits}/>
+            
             <StoreItem r={'3'} c={'2'} name={"Basketball"} price={25} credits={credits} setCredits={setCredits}/>
             <StoreItem r={'3'} c={'3'} name={"Car"} price={30} credits={credits} setCredits={setCredits}/>
             <StoreItem r={'3'} c={'4'} name={"Boat"} price={35} credits={credits} setCredits={setCredits}/>
