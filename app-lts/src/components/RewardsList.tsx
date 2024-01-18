@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './RewardsList.css';
 import '../index.css'
 import '../App.css';
