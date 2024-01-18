@@ -36,7 +36,7 @@ interface DonationBlockProps {
     org_id : string
 }
 
-const DonationBlock : React.FC<DonationBlockProps> = ({name, org_id}) => {
+const DonationBlock : React.FC<DonationBlockProps> = ({name}) => {
     return (
         <>
             <tr className="donation-row">
