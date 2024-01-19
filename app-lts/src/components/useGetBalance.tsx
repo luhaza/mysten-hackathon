@@ -1,6 +1,6 @@
 import { useSuiClientQuery } from "@mysten/dapp-kit";
 
-export const useGetBalance = () => {
+export const UseGetBalance = () => {
   const handleGetBalance = (org_id : string) => {
 
     const id : string = org_id;

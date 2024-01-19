@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import {useGetBalance} from "./UseGetBalance";
+import {UseGetBalance} from "./UseGetBalance";
 import { SuiObjectData } from "@mysten/sui.js/client";
 
 interface BalanceContextProps {
@@ -7,7 +7,7 @@ interface BalanceContextProps {
   balance: number;
 }
 
-const handleGetBalance = useGetBalance();
+const handleGetBalance = UseGetBalance();
 
 const BalanceContext = createContext<BalanceContextProps | undefined>(undefined);
 
@@ -28,6 +28,9 @@ export const BalanceProvider: React.FC<{ children: React.ReactNode; _org_id : st
   }, [isLoading, data]);
 
   useEffect(() => {
+    if (error){
+      console.log(error)
+    }
     const interval = setInterval(() => {
       refetch();
       console.log(interval);
