@@ -27,6 +27,12 @@
   min-height: 400px;
 }
 
+.title{
+  color: #c0edfc; 
+  font-size: 60px; 
+  font-weight: bold; 
+}
+
 .App-link {
   color: black;
 }
@@ -50,16 +56,21 @@ h1{
 }
 
 .page{
-  background-color: white; 
-  padding-bottom:20px; 
+  background-color: white;  
   padding-top: 20px;
-  padding-right: 4px; 
-  padding-left: 4px;  
+  width: 100%; 
+  height: 100%; 
+}
+
+.page-header{
+  width: 100%; 
+  display: flex; 
+  justify-content: center; 
 }
 
 .spacer{
   background-color: clear;
-  height: 60px;  
+  height: 20px;  
 }
 
 button{
@@ -84,6 +95,7 @@ button{
   display:flex; 
   flex-direction: row; 
   justify-content: space-between;  
+  height: 100%; 
 }
 .organizations{
   justify-content: space-evenly; 

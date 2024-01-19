@@ -8,11 +8,14 @@ function App() {
   const account = useCurrentAccount(); 
   return (
     <div className="page">
+      <div className="page-header">
+        <p className="title"> Suiweed </p>
+        {/* <img src="app-lts/images/seaweed-2.png" alt="Suiweed"></img> */}
+      </div>
       <div className="flex-container-row">
         <ConnectButton />
         {!account && <div>No account connected</div>}
       </div>
-      
       <div className="spacer"></div>
       <MyBox />
     </div>
@@ -21,7 +24,7 @@ function App() {
 
 function MyBox(){
   return (
-    <div className="flex-container-row organizations">
+    <div className="flex-container-row">
       <UserAndRewards/>
       <OrganizationsList/>
     </div>
