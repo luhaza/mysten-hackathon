@@ -15,5 +15,5 @@ export const useGetBalance = () => {
     return { data, isLoading, error, refetch };
   };
 
-  return { handleGetBalance };
+  return handleGetBalance;
 };

@@ -5,6 +5,7 @@ import {
 import React, { useState } from 'react';
 import { TransactionBlock } from "@mysten/sui.js/transactions"; 
 
+const donateAmount : number = 1000;
 interface DonateButtonProps {
     org_id : string
 }
@@ -16,7 +17,7 @@ const DonateButton : React.FC<DonateButtonProps>= ({ org_id }) => {
  
     const donate = () => {
         let txb = new TransactionBlock();
-        const [coin] = txb.splitCoins(txb.gas, [txb.pure.u64(1000)]);
+        const [coin] = txb.splitCoins(txb.gas, [txb.pure.u64(donateAmount)]);
         
         txb.moveCall({
             target: '0x2da8cd5a514de9150ed7019e1e1ccf6ec4f23f272162a8389813d5a56fd1b151::organization::donate', 

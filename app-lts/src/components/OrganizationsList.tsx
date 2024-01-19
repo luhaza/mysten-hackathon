@@ -70,8 +70,8 @@ const DonationBlock : React.FC<DonationBlockProps> = ({name, _org_id}) => {
                  </div> */}
                  <td></td>
                  <td>
-                    <BalanceProvider>
-                        <TotalBalance org_id={_org_id}/>
+                    <BalanceProvider _org_id={_org_id}>
+                        <TotalBalance/>
                         <DonateButton org_id={_org_id}/>
                     </BalanceProvider>
                     

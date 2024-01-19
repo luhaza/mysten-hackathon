@@ -1,21 +1,42 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import {useGetBalance} from "./UseGetBalance";
+import { SuiObjectData } from "@mysten/sui.js/client";
 
 interface BalanceContextProps {
+  _org_id : string;
   balance: number;
-  updateBalance: (amount: number) => void;
 }
+
+const handleGetBalance = useGetBalance();
 
 const BalanceContext = createContext<BalanceContextProps | undefined>(undefined);
 
-export const BalanceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const BalanceProvider: React.FC<{ children: React.ReactNode; _org_id : string}> = ({ children, _org_id }) => {
+  // const { data, isLoading, error, refetch } = handleGetBalance(_org_id);
+
+  const { data, isLoading, error, refetch } = handleGetBalance(_org_id);
+
   const [balance, setBalance] = useState<number>(0);
 
-  const updateBalance = (amount: number) => {
-    setBalance((prevBalance) => prevBalance + amount);
-  };
+  useEffect(() => {
+    if (!isLoading && data && data.data) {
+      // Set the initial balance from the API response
+      const fields = getBalanceField(data.data)
+      const num : number = fields['balance'];
+      setBalance(num);
+    }
+  }, [isLoading, data]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+      console.log(interval);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <BalanceContext.Provider value={{ balance, updateBalance }}>
+    <BalanceContext.Provider value={{ _org_id, balance }}>
       {children}
     </BalanceContext.Provider>
   );
@@ -28,3 +49,12 @@ export const useBalance = () => {
   }
   return context;
 };
+
+function getBalanceField(data: SuiObjectData) {
+  if (data.content?.dataType !== "moveObject") {
+    throw new Error("Content not found");
+  }
+  const fields = data.content.fields as { balance: number};
+  // console.log(fields);
+  return fields;
+}
