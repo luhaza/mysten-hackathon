@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import {UseGetBalance} from "./UseGetBalance";
+import useGetBalance from "./useGetBalance"
 import { SuiObjectData } from "@mysten/sui.js/client";
 
 interface BalanceContextProps {
@@ -7,7 +7,7 @@ interface BalanceContextProps {
   balance: number;
 }
 
-const handleGetBalance = UseGetBalance();
+const handleGetBalance = useGetBalance();
 
 const BalanceContext = createContext<BalanceContextProps | undefined>(undefined);
 
