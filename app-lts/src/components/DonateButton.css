@@ -1,0 +1,16 @@
+label {
+    /* Add your desired styles */
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    /* You can add more styles as needed */
+  }
+  
+  /* Optional: Add styles for the input field associated with the label */
+  input {
+    padding: 2px;
+    margin-top: 5px;
+    color: black; 
+    background-color: white; 
+    /* Add more input styles as needed */
+  }

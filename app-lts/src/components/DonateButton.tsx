@@ -4,6 +4,7 @@ import {
 } from '@mysten/dapp-kit';
 import React, { useState } from 'react';
 import { TransactionBlock } from "@mysten/sui.js/transactions"; 
+import './DonateButton.css';
 
 // const donateAmount : number = 1000;
 interface DonateButtonProps {
@@ -42,7 +43,7 @@ const DonateButton : React.FC<DonateButtonProps>= ({ org_id }) => {
 			{currentAccount && (
 				<>
                     <div className="flex">
-                        <button className="bg-blue-500 rounded 5px">
+                        <button className="bg-blue-500">
                         <label htmlFor="donateAmount">Donate Amount: </label>
                         <input
                         type="number"
@@ -72,7 +73,7 @@ const DonateButton : React.FC<DonateButtonProps>= ({ org_id }) => {
                                     );
                                 }}
 
-                            className="bg-blue-400 hover:bg-blue-700 text-white font-bold rounded-lg py-10% px-5% rounded m-4 sm:text-md md:text-lg lg:text-xl">
+                            className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-10% px-5% m-4 sm:text-md md:text-lg lg:text-xl p-2">
                                 DONATE
                             </button>
                         </div>

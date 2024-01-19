@@ -4,7 +4,7 @@ import { useBalance } from "./BalanceContext";
 const TotalBalance : React.FC = () => {
     const { balance } = useBalance();
 
-    return <div> Total Balance: ${balance} </div>
+    return <div> {balance} SUI </div>
 }
 
 export default TotalBalance;

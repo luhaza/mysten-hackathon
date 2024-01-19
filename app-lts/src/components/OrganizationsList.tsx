@@ -8,7 +8,9 @@ import { BalanceProvider } from './BalanceContext';
 const OrganizationsList = () => {
     return (
         <div className="flex-column large-container">
-            <h2 className="orgHeader"> Current Fundraisers</h2>
+            <div className="flex flex-col row-start-1 col-start-2 col-end-4 justify-center items-center">
+                <h2 className="text-white font-bold text-3xl">Current Fundraisers</h2>
+            </div>
             <FundraiserBlock />
         </div>
     )
@@ -22,8 +24,7 @@ function FundraiserBlock() { //need parameters
         <table className="infoTable">
             <tr className="infoRow">
                 <th>Organization</th>
-                <th>Goal</th>
-                <th>Current Donation %</th>
+                <th>Total</th>
             </tr>
             <DonationBlock name={"Williams"} _org_id={'0x62be33c3b976258aebd029d44b23154d5862d9e2b5a100a17c43f0c817214f4e'}/>
             <DonationBlock name={"Mysten"} _org_id={'0x0f965689c52bc13e5b1d90f6e1600628c5f2d1e989f39a10e1c83267fca133c5'}/>
@@ -46,23 +47,20 @@ const DonationBlock : React.FC<DonationBlockProps> = ({name, _org_id}) => {
                         <td>{name}</td>
                 </td>
                 <td className="donation-container">
-                        <td> $ Goal</td>
-                </td>
-                <td className="donation-container">
-                        <td>Current Donation</td>
+                        <td>
+                        <BalanceProvider _org_id={_org_id}>
+                            <TotalBalance/>
+                        </BalanceProvider>
+                        </td>
                 </td> 
             </tr>
             <tr> 
                  <td>
                     <BalanceProvider _org_id={_org_id}>
-                        <TotalBalance/>
+                        <DonateButton org_id={_org_id}/>
                     </BalanceProvider>
                  </td>
                  <td>
-                    <BalanceProvider _org_id={_org_id}>
-                        <DonateButton org_id={_org_id}/>
-                    </BalanceProvider>
-                    
                 </td>
             </tr>
         </>
@@ -70,10 +68,3 @@ const DonationBlock : React.FC<DonationBlockProps> = ({name, _org_id}) => {
         
     ); 
 }
-
-// function animateProgressBar(){
-//     const progressBar = document.getElementById('progressBar');
-//     const targetPercentage = 70; 
-//     progressBar.style.width = '${targetPercentage}%'; 
-//     progressBar.value = targetPercentage;              
-// }

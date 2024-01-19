@@ -10,9 +10,9 @@ const RewardsList = () => {
     return (     
         <div className="grid grid-cols-4 grid-rows-3 gap-4 bg-blue-200 p-3">
             <div className="flex flex-col row-start-1 col-start-2 col-end-4 justify-center items-center">
-                <h2 className="text-white font-bold text-5xl">Rewards Store</h2>
+                <h2 className="text-white font-bold text-3xl">Rewards Store</h2>
             </div>
-            <div className="row-start-2 col-start-1 bg-blue-500 p-4 w-25 h-32 rounded-lg">
+            <div className="row-start-2 col-start-1 bg-blue-500 p-4 w-25 h-32">
                 <CreditsButton credits={credits}/>
             </div>
             <StoreItem r={'2'} c={'2'} name={"Apple"} price={5} credits={credits} setCredits={setCredits}/>
