@@ -2,6 +2,6 @@ import WindiCSS from 'vite-plugin-windicss';
 
 export default {
   plugins: [
-    WindiCSS(),
+    WindiCSS() as any,
   ],
 };
