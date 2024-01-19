@@ -17,6 +17,13 @@ const DonateButton : React.FC<DonateButtonProps>= ({ org_id }) => {
  
     const donate = () => {
         let txb = new TransactionBlock();
+
+        //api call to load user data, if empty --> 
+        //const [user] = txb.moveCall
+        //txb.transferObject(user, currentAccount.address);
+
+        //else 
+
         const [coin] = txb.splitCoins(txb.gas, [txb.pure.u64(donateAmount)]);
         
         txb.moveCall({
@@ -65,11 +72,11 @@ const DonateButton : React.FC<DonateButtonProps>= ({ org_id }) => {
                                     );
                                 }}
 
-						className="bg-blue-400 hover:bg-blue-700 text-white font-bold rounded-lg py-10% px-5% rounded m-6 sm:text-md md:text-lg lg:text-xl p-3">
-							DONATE
-						</button>
-					</div>
-
+                            className="bg-blue-400 hover:bg-blue-700 text-white font-bold rounded-lg py-10% px-5% rounded m-4 sm:text-md md:text-lg lg:text-xl">
+                                DONATE
+                            </button>
+                        </div>
+                    </div>
 				</>
 			)}
 		</div>
