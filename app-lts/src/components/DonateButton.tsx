@@ -54,11 +54,10 @@ const DonateButton : React.FC<DonateButtonProps>= ({ org_id }) => {
 								);
 							}}
 
-						className="bg-blue-400 hover:bg-blue-700 text-white font-bold rounded-lg py-10% px-5% rounded m-4 sm:text-md md:text-lg lg:text-xl">
+						className="bg-blue-400 hover:bg-blue-700 text-white font-bold rounded-lg py-10% px-5% rounded m-6 sm:text-md md:text-lg lg:text-xl p-3">
 							DONATE
 						</button>
 					</div>
-                    <div>Digest: {digest}</div>
 				</>
 			)}
 		</div>

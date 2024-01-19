@@ -7,7 +7,7 @@ import { BalanceProvider } from './BalanceContext';
 
 const OrganizationsList = () => {
     return (
-        <div className="flex-column large-container org-info">
+        <div className="flex-column large-container">
             <h2 className="orgHeader"> Current Fundraisers</h2>
             <FundraiserBlock />
         </div>
@@ -46,36 +46,23 @@ const DonationBlock : React.FC<DonationBlockProps> = ({name, _org_id}) => {
                         <td>{name}</td>
                 </td>
                 <td className="donation-container">
-                        <td>Goal</td>
+                        <td> $ Goal</td>
                 </td>
                 <td className="donation-container">
                         <td>Current Donation</td>
                 </td> 
             </tr>
-             <tr> 
-                
-                 {/* <div className="task-progress">
-                    <button onClick={}>
-
-                    </button>
-                    {<progress id="progressBar" className="progress progress1" max="100" value="65"></progress>}
-
-                     {<script>
-                        document.addEventLister("DOMContentLoaded", function () {
-                            animateProgressBar()
-                        })
-
-                        
-                     </script>}
-                 </div> */}
-                 <td></td>
+            <tr> 
                  <td>
                     <BalanceProvider _org_id={_org_id}>
                         <TotalBalance/>
+                    </BalanceProvider>
+                 </td>
+                 <td>
+                    <BalanceProvider _org_id={_org_id}>
                         <DonateButton org_id={_org_id}/>
                     </BalanceProvider>
                     
-                    {/* <button className="popup-btn">Donate HERE</button> */}
                 </td>
             </tr>
         </>

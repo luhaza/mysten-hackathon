@@ -23,16 +23,8 @@
     padding: 20px; 
 }
 th{
-    border-bottom: 1px solid black; 
+    /* border-bottom: 1px solid black;  */
     font-size: 22px;
-}
-tr{
-    border-bottom: 1px solid black; 
-}
-td{
-    /* display: flex; 
-    flex-direction: column; 
-    border-radius: 8px;  */
 }
 
 .donation-row{
