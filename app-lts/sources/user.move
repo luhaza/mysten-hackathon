@@ -27,6 +27,11 @@ module marketplace::user {
         self.points = self.points + num_points;
     }
 
+    // public function to add points to a user's profile
+    public fun subtract_points(self: &mut User, num_points: u64) {
+        self.points = self.points - num_points;
+    }
+
     // public getter methods
     public fun id(self: &User) : ID {object::uid_to_inner(&self.id)}
     public fun username(self: &User): String { self.username }
