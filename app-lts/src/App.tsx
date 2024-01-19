@@ -1,11 +1,10 @@
 import './App.css';
 import UserAndRewards from './components/UserAndRewards'
 import OrganizationsList from './components/OrganizationsList'
-import { ConnectButton, useCurrentAccount } from '@mysten/dapp-kit'; 
+import { ConnectButton } from '@mysten/dapp-kit'; 
 
 
 function App() {
-  const account = useCurrentAccount(); 
   return (
     <div className="page">
       <div className="page-header">
