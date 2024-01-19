@@ -20,7 +20,7 @@ const DonateButton : React.FC<DonateButtonProps>= ({ org_id }) => {
         const [coin] = txb.splitCoins(txb.gas, [txb.pure.u64(donateAmount)]);
         
         txb.moveCall({
-            target: '0x2da8cd5a514de9150ed7019e1e1ccf6ec4f23f272162a8389813d5a56fd1b151::organization::donate', 
+            target: '0xd4ef611945e795df3fdfcc1bb3b5147ca90262cd603d0a39b0813eba74715ec0::organization::donate', 
             arguments: [txb.object(org_id), coin]
         });
         return txb;
