@@ -2,6 +2,7 @@ import React from 'react'
 import '../App.css';
 import './OrganizationsListStyle.css';
 import DonateButton from './DonateButton'
+import TotalBalance from './TotalBalance';
 
 const OrganizationsList = () => {
     return (
@@ -32,16 +33,16 @@ function FundraiserBlock() { //need parameters
   }
 
 interface DonationBlockProps {
-    name : string,
-    org_id : string
+    _name : string,
+    _org_id : string
 }
 
-const DonationBlock : React.FC<DonationBlockProps> = ({name}) => {
+const DonationBlock : React.FC<DonationBlockProps> = ({_name, _org_id}) => {
     return (
         <>
             <tr className="donation-row">
                 <td className="donation-container">
-                        <td>{name}</td>
+                        <td>{_name}</td>
                 </td>
                 <td className="donation-container">
                         <td>Goal</td>
@@ -53,9 +54,9 @@ const DonationBlock : React.FC<DonationBlockProps> = ({name}) => {
              <tr> 
                 
                  <div className="task-progress">
-                    {/* <button onClick={}>
+                    <button onClick={}>
 
-                    </button> */}
+                    </button>
                     {/* <progress id="progressBar" className="progress progress1" max="100" value="65"></progress> */}
 
                      {/* <script>
@@ -68,7 +69,8 @@ const DonationBlock : React.FC<DonationBlockProps> = ({name}) => {
                  </div>
                  <td></td>
                  <td>
-                    <DonateButton/>
+                    <TotalBalance org_id={_org_id}/>
+                    <DonateButton org_id={_org_id}/>
                     {/* <button className="popup-btn">Donate HERE</button> */}
                 </td>
             </tr>
