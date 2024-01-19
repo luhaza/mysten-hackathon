@@ -11,13 +11,6 @@ function App() {
       <div className="flex-container-row">
         <ConnectButton />
         {!account && <div>No account connected</div>}
-        {account && (
-				<div>
-					<h2>Current account:</h2>
-					<div>Address: {account.address}</div>
-          <div>Label: {account.label}</div>
-				</div>
-			)}
       </div>
       
       <div className="spacer"></div>
